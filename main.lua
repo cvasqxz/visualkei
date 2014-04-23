@@ -12,16 +12,17 @@ font = love.graphics.newFont("font/visitor.ttf",200)
 	noise = false
 	sine = 0
 	paleta = 0
+	efecto = 0
 	
 	buff = {}
-	for i=0,47 do
+	for i=0,48 do
 	buff[i] = {}
 	for j=0,32 do
 	buff[i][j] = 2
 	end end
 	
 	buff2 = {}
-	for i=0,47 do
+	for i=0,48 do
 	buff2[i] = {}
 	for j=0,32 do
 	buff2[i][j] = 2
@@ -36,6 +37,8 @@ function love.keypressed(k)
 	
 	if k == 'down' then sine = sine + 1 if sine == 5 then sine = 0 end end
 	
+	if k == 'left' then efecto = efecto + 1 if efecto == 5 then efecto = 0 end end
+	
 	if k == 'up' then if noise == false then noise = true else noise = false end end
 
 end
@@ -43,6 +46,48 @@ end
 function love.update(dt)
 
 ruido()
+
+if efecto == 0 then
+barrido()
+end
+
+if efecto == 1 then
+plasma()
+end
+
+i = i + 1
+
+if i == 48*50 then
+i = 0
+end
+
+	if math.fmod(i,4) == 0 then
+	
+	paleta = math.random(0,5)
+
+	end
+
+end
+
+function love.draw()
+
+draw()
+heellxz()
+
+end
+
+
+function ruido()
+	if noise == true then
+	
+		for x = 0,47 do for y = 0,32 do
+			buff2[x][y] = math.random(0,1)/4
+		end end
+	
+	end
+	end
+	
+function barrido()
 
 	for s = 0,dy do
 		buff[dx][s] = 2
@@ -78,38 +123,9 @@ ruido()
 	for x = 0,46 do for y = 0,32 do
 		buff[x][y] = buff[x+1][y] 
 	end end
-	
-	i = i + 1
-	
-	if i == 48 then
-	i = 0	
-	end
-	
-	if math.fmod(i,4) == 0 then
-	
-	paleta = math.random(0,5)
-
-	end
-
 
 end
 
-function love.draw()
-
-drawbuff()
-heellxz()
-
-end
-
-function ruido()
-	if noise == true then
-	
-		for x = 0,47 do for y = 0,32 do
-			buff2[x][y] = math.random(0,1)/2
-		end end
-	
-	end
-	end
 
 function heellxz()
 love.graphics.setFont(font)
@@ -118,7 +134,7 @@ love.graphics.print("H33llxz", 70, 170)
 end
 
 
-function drawbuff()
+function draw()
 
 for x=0,47 do for y=0,32 do
 
@@ -180,4 +196,22 @@ love.graphics.rectangle("fill", (x*16),512-(y*16),16,16)
 
 end end
 
+end
+
+function math.dist(x1,y1, x2,y2) return ((x2-x1)^2+(y2-y1)^2)^0.5 end
+
+function plasma()
+
+for x=0,48 do for y=0,32 do
+
+ var1 = 48*math.sin(math.dist(x + math.cos(i*math.pi/24), y+x, 18, i) / 11)
+ var2 = 33*math.sin(math.dist(x, y+i, i+6, 12) / 9)
+ var3 = 47*math.sin(math.dist(math.abs(math.sin(x*math.pi/12)), y, 21, 31) / 10)
+ var4 = 40*math.cos(math.dist(x+i, y, 12, 24) / 8)
+        
+
+color = (math.floor((math.abs(var1+var2+var3+var4))) + 45)/150
+
+buff[x][y] = color
+end end
 end
