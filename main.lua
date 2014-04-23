@@ -42,7 +42,7 @@ end
    
 function love.update(dt)
 
-noise()
+ruido()
 
 	for s = 0,dy do
 		buff[dx][s] = 2
@@ -101,7 +101,7 @@ heellxz()
 
 end
 
-function noise()
+function ruido()
 	if noise == true then
 	
 		for x = 0,47 do for y = 0,32 do
