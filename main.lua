@@ -1,47 +1,49 @@
 function love.load()
 
-font = love.graphics.newFont("font/visitor.ttf",200)
+titulo = love.graphics.newFont("font/visitor.ttf",250)
+subtitulo = love.graphics.newFont("font/visitor.ttf",24)
 
-	love.graphics.setBackgroundColor(255,255,255)
-	love.graphics.setMode(768,512,false,false,0)
 	
-	i = 0
-	dx = 47
-	dy = 0
-	
-	noise = false
-	hx = true
-	sine = 0
-	paleta = 0
-	efecto = 0
-	
-	buff = {}
-	for i=0,48 do
-	buff[i] = {}
-	for j=0,32 do
-	buff[i][j] = 2
-	end end
-	
-	buff2 = {}
-	for i=0,48 do
-	buff2[i] = {}
-	for j=0,32 do
-	buff2[i][j] = 2
-	end end
+i = 0
+dx = 48
+dy = 0
+
+noise = false
+hx = true
+sine = 0
+paleta = 0
+efecto = 0
+
+buff = {}
+for i=0,48 do
+buff[i] = {}
+for j=0,32 do
+buff[i][j] = 2
+end end
+
+buff2 = {}
+for i=0,48 do
+buff2[i] = {}
+for j=0,32 do
+buff2[i][j] = 2
+end end
 
 end
 
 function love.keypressed(k)
 
-	if k == ' ' then i = 0 end
-	
-	if k == 'down' then sine = sine + 1 if sine == 5 then sine = 0 end end
-	
-	if k == 'left' then efecto = efecto + 1 if efecto == 5 then efecto = 0 end end
-	
-	if k == 'up' then if noise == false then noise = true else noise = false end end
+if k == 'x' then love.event.quit() end
 
-	if k == 'right' then if hx == false then hx = true else hx = false end end
+if k == ' ' then i = 0 end
+
+if k == 'down' then sine = sine + 1 if sine == 5 then sine = 0 end end
+
+if k == 'left' then efecto = efecto + 1 if efecto == 5 then efecto = 0 end end
+
+if k == 'up' then if noise == false then noise = true else noise = false end end
+
+if k == 'right' then if hx == false then hx = true else hx = false end end
+
 end
    
 function love.update(dt)
@@ -81,7 +83,7 @@ end
 function ruido()
 	if noise == true then
 	
-		for x = 0,47 do for y = 0,32 do
+		for x = 0,48 do for y = 0,32 do
 			buff2[x][y] = math.random(0,1)/4
 		end end
 	
@@ -120,17 +122,22 @@ function barrido()
 	end
 	
 	
-	for x = 0,46 do for y = 0,32 do
+	for x = 0,47 do for y = 0,32 do
 		buff[x][y] = buff[x+1][y] 
 	end end
 end
 
 
 function heellxz()
+
 if hx == true then
-love.graphics.setFont(font)
+love.graphics.setFont(titulo)
 love.graphics.setColor(math.random(0,255),math.random(0,255),math.random(0,255))
-love.graphics.print("H33llxz", 70, 170)
+love.graphics.print("H33llxz",100 + math.random(0,6), 195 + math.random(0,6))
+
+love.graphics.setFont(subtitulo)
+love.graphics.setColor(math.random(0,255),math.random(0,255),math.random(0,255))
+love.graphics.print("Visualkei - VJing App                                              chipmusic", 100 + math.random(0,6), 345  + math.random(0,6))
 end
 end
 
@@ -192,7 +199,7 @@ else
 
 	end
 	
-love.graphics.rectangle("fill", (x*16),512-(y*16),16,16)
+love.graphics.rectangle("fill", (x*21),600-(y*18),21,18)
 
 end end
 end
