@@ -83,7 +83,7 @@ function ruido()
 	if noise == true then
 	
 		for x = 0,48 do for y = 0,32 do
-			buff2[x][y] = math.random(0,1)/4
+			buff2[x][y] = buff[x][y]*math.random(1,3)/4
 		end end
 	
 	end
@@ -198,7 +198,7 @@ else
 
 	end
 	
-love.graphics.rectangle("fill", (x*21),600-(y*18),21,18)
+love.graphics.rectangle("fill", (x*21),600-(y*18.75),21,18.75)
 
 end end
 end
@@ -212,7 +212,7 @@ for x=0,48 do for y=0,32 do
 	 var3 = 4*math.sin(math.dist(math.abs(math.sin(x*math.pi/12)), y, 21, 31) / 10)
 	 var4 = 4*math.cos(math.dist(x+i, y, 12, 24) / 8)
 	        
-	color = math.floor((math.abs(var1+var2+var3+var4)))/10
+	color = math.floor((math.abs(var1+var2+var3+var4)))/7
 	
 	buff[x][y] = color
 end end
@@ -239,8 +239,7 @@ if sine == 2 then dist1 = math.floor(math.dist(x,y,z3,t3)) end
 if sine == 3 then dist1 = math.floor(math.dist(x,y,z1,t3)) end
 if sine == 4 then dist1 = math.floor(math.dist(x,y,z3,t2)) end
 
-buff[x][y] = math.floor(2*math.cos((i*math.pi)/dist1) )
-buff2[x][y] = math.floor(2.5*math.sin((i*math.pi)/dist1) )
+buff[x][y] = math.floor(math.cos((i*math.pi)/dist1))/2 + 0.5
 
 end
 end
