@@ -3,7 +3,6 @@ function love.load()
 titulo = love.graphics.newFont("font/visitor.ttf",250)
 subtitulo = love.graphics.newFont("font/visitor.ttf",24)
 
-	
 i = 0
 dx = 48
 dy = 0
