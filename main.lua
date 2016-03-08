@@ -3,8 +3,9 @@ function love.load()
 	subtitulo = love.graphics.newFont("font/visitor.ttf",45)
 
 	i = 0
-	dx = 48
-	dy = 32
+	zoom = 1
+	dx = 48*zoom
+	dy = 32*zoom
 
 	screen_y = love.graphics.getHeight()/dy
 	screen_x = love.graphics.getWidth()/dx
@@ -53,7 +54,7 @@ function love.update(dt)
 	end
 
 	if efecto == 2 then
-		blanco()
+		fuego()
 	end
 
 	i = i + 1
@@ -89,7 +90,7 @@ end
 
 function draw()
 	for x=0,dx do for y=0,dy do
-		if noise == true then
+		if noise == true and efecto ~= 2 then
 			if paleta == 0 then
 			love.graphics.setColor((buff[x][y]*100+40),0,(buff2[x][y]*100+55),255)
 			end
@@ -143,7 +144,7 @@ function draw()
 		end
 		
 		love.graphics.rectangle("fill", (x*screen_x),love.graphics.getHeight()-(y*screen_y),screen_x,screen_y)
-
+		buff2[x][y] = buff[x][y]
 	end end
 	end
 
@@ -204,3 +205,17 @@ function blanco()
 	end end
 end
 
+function fuego()
+	for j = 0,dx do
+		buff2[j][0] = math.random(0,10)
+		buff2[j][1] = math.random(0,10)
+		buff[j][0] = math.random(0,10)
+		buff[j][1] = math.random(0,10)
+	end
+	
+	for x = 0,dx do for y = 1,dy-1 do
+		buff[x][y+1] = ((buff2[x][y] + buff2[x][y+1] + buff2[x][y-1]) / 4) - math.random(0,0.3)
+	end end
+   
+end
+  
